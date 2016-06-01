@@ -5,9 +5,15 @@
 #   gem 'sqlite3'
 #
 default: &default
-  adapter: sqlite3
+  adapter: mysql
+  encoding: utf8
+  pool: 5
+  min_messages: warning
   pool: 5
   timeout: 5000
+  username: <%= ENV[“DB_USERNAME”] %>
+  password: <%= ENV[“DB_PASSWORD”] %>
+  host: <%= ENV[“DB_HOSTNAME”] %>
 
 development:
   <<: *default
@@ -22,4 +28,4 @@ test:
 
 production:
   <<: *default
-  database: db/production.sqlite3
+  database: <%= ENV[“DB_NAME”] %
